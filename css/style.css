@@ -1,10 +1,13 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
 #sentence {
 	width: 550px;
 	margin: 100px auto;
 	text-align: center;
 	line-height: 1.7;
 	font-size: 28px;
-	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 }
 
@@ -25,4 +28,25 @@ span.correct {
 span.incorrect {
 	border-bottom: 2px solid #C33;
 	background-color: #FCC;
+}
+
+#stats {
+	border: 1px solid #EEE;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 550px;
+	overflow: hidden;
+}
+
+.stat {
+	float: left;
+    margin: 3% 0;
+    padding: 0 3%;
+    text-align: center;
+    width: 27%;
+	border-right: 1px solid #EEE;
+}
+
+.stat:last-child {
+	border-right: 0;
 }
