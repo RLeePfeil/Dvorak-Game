@@ -38,7 +38,7 @@ function onDownCallback(e, a, c) {
 		return false;
 	}
 	
-	if (a.length>1 && c == a[0] && c != 'space') {
+	if (a.length>1 && c != a[a.length-1]) {
 		return false;
 	}
 	
@@ -58,17 +58,11 @@ function onDownCallback(e, a, c) {
 }
 
 function alphabet() {
-	return 'a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,.,\',(,),",comma,backspace,space';
+	return 'a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,.,\',(,),",comma,backspace,spacebar';
 }
 
 function compareKeys(html, array, c) {
 	html = html == ' ' ? 'spacebar' : html; // Map spacebar properly
-	
-	/*for (var i=0; i<array.length; i++) {
-		if (html == array[i]) {
-			return true;
-		}
-	}*/
 	
 	if (html == array[array.length-1]) {
 		return true;

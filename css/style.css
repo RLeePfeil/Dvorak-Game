@@ -1,0 +1,28 @@
+#sentence {
+	width: 550px;
+	margin: 100px auto;
+	text-align: center;
+	line-height: 1.7;
+	font-size: 28px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+span.char {
+	padding: .1em .025em;
+	color: #444;
+}
+
+span.current {
+	border-bottom: 2px dotted #999;
+}
+
+span.correct {
+	border-bottom: 2px solid #3C3;
+	background-color: #CFC;
+}
+
+span.incorrect {
+	border-bottom: 2px solid #C33;
+	background-color: #FCC;
+}
