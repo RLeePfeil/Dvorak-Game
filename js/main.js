@@ -39,59 +39,63 @@ function addSentence(sentence) {
  * c = character
  */
 function onDownCallback(e, a, c) {
-	e.preventDefault();
-	
-	// Start stats timer
-	if (stats.startTime == null) {
-		stats.startTime = Date.now();
-	}
-	
-	//console.log(e);
-	//console.log(a);
-	//console.log(c);
-	
-	var $current = $('span.current', '#sentence');
-	if (c == 'backspace') {
-		var $prev = $current.prev();
-		if ($prev.length) {
-			$prev.removeClass('correct incorrect').addClass('current');
-			$current.removeClass('correct incorrect current');
-			stats.numChars--;
-			if ($prev.html() == ' ') {
-				stats.numWords--;
+	// Test that alt, ctrl and cmd aren't down - if they are, ignore
+	if (!(e.altKey || e.ctrlKey || e.metaKey)) {
+		e.preventDefault();
+		
+		// Start stats timer
+		if (stats.startTime == null) {
+			stats.startTime = Date.now();
+		}
+		
+		console.log(e);
+		//console.log(a);
+		//console.log(c);
+		
+		var $current = $('span.current', '#sentence');
+		if (c == 'backspace') {
+			var $prev = $current.prev();
+			if ($prev.length) {
+				$prev.removeClass('correct incorrect').addClass('current');
+				$current.removeClass('correct incorrect current');
+				stats.numChars--;
+				if ($prev.html() == ' ') {
+					stats.numWords--;
+				}
 			}
+			
+			return false;
 		}
+		
+		if (a.length>1 && c != a[a.length-1]) {
+			return false;
+		}
+		
+		if (compareKeys($current.html(), a, c)) {
+			$current.addClass('correct');
+			stats.numCorrectChars++;
+			
+			if (a[a.length-1] == 'spacebar') {
+				stats.numWords++;
+			}
+		} else {
+			$current.addClass('incorrect');
+			stats.numIncorrectChars++;
+		}
+		
+		stats.numChars ++;
+		
+		$next = $current.next();
+		if ($next.length) {
+			$next.addClass('current');
+			$current.removeClass('current');
+		}
+		
+		updateStats();
 		
 		return false;
 	}
-	
-	if (a.length>1 && c != a[a.length-1]) {
-		return false;
-	}
-	
-	if (compareKeys($current.html(), a, c)) {
-		$current.addClass('correct');
-		stats.numCorrectChars++;
-		
-		if (a[a.length-1] == 'spacebar') {
-			stats.numWords++;
-		}
-	} else {
-		$current.addClass('incorrect');
-		stats.numIncorrectChars++;
-	}
-	
-	stats.numChars ++;
-	
-	$next = $current.next();
-	if ($next.length) {
-		$next.addClass('current');
-		$current.removeClass('current');
-	}
-	
-	updateStats();
-	
-	return false;
+	return true; // So my editor wouldn't give me the "doesn't always return a value" error
 }
 
 function toggleConvertQWERTY() {
