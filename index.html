@@ -5,22 +5,33 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<div id="sentence">
+	<div id="container">
+		<div id="sentence"></div>
 		
-	</div>
-	
-	<div id="stats">
-		<div class="stat">
-			<h3>chars p/m</h3>
-			<p id="stat-cpm">-</p>
+		<div id="options">
+			<label>QWERTY &#8702; DVORAK</label>
+			<div id="switch-convert-qwerty" class="switch">
+				<span class="switch-slide">
+					<span class="switch-slide-label-on">ON</span>
+					<span class="switch-slide-toggle"></span>
+					<span class="switch-slide-label-off">OFF</span>
+				</span>
+			</div>
 		</div>
-		<div class="stat">
-			<h3>words p/m</h3>
-			<p id="stat-wpm">-</p>
-		</div>
-		<div class="stat">
-			<h3>accuracy</h3>
-			<p id="stat-accuracy">-</p>
+		
+		<div id="stats">
+			<div class="stat">
+				<h3>chars p/m</h3>
+				<p id="stat-cpm">-</p>
+			</div>
+			<div class="stat">
+				<h3>words p/m</h3>
+				<p id="stat-wpm">-</p>
+			</div>
+			<div class="stat">
+				<h3>accuracy</h3>
+				<p id="stat-accuracy">-</p>
+			</div>
 		</div>
 	</div>
 	

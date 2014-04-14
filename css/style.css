@@ -1,10 +1,21 @@
 body {
 	font-family: 'Open Sans', sans-serif;
+	background-color: #fcfbfa;
+}
+
+label {
+	font-size: 75%;
+	padding-right: 2em;
+	vertical-align: middle;
+}
+
+#container {
+	margin: 0 auto;
+	max-width: 550px;
+	padding: 50px;
 }
 
 #sentence {
-	width: 550px;
-	margin: 100px auto;
 	text-align: center;
 	line-height: 1.7;
 	font-size: 28px;
@@ -18,6 +29,7 @@ span.char {
 
 span.current {
 	border-bottom: 2px dotted #999;
+	color: #AA4488;
 }
 
 span.correct {
@@ -30,12 +42,18 @@ span.incorrect {
 	background-color: #FCC;
 }
 
+#options {
+	border-top: 1px dashed #CCC;
+    margin: 1.5em 0 0;
+    padding: 0.5em 0;
+}
+
 #stats {
 	border: 1px solid #EEE;
     border-radius: 5px;
     margin: 0 auto;
-    width: 550px;
 	overflow: hidden;
+	background-color: #FFF;
 }
 
 .stat {
@@ -49,4 +67,70 @@ span.incorrect {
 
 .stat:last-child {
 	border-right: 0;
+}
+
+.stat h3 {
+	font-size: 85%;
+	text-transform: uppercase;
+	margin-bottom: 0;
+	margin-top: 10px;
+	color: #AAA;
+}
+
+.stat p {
+	font-size: 125%;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+.switch {
+	border-radius: 5px;
+	border: 1px solid #EEE;
+	background: #FFF;
+	cursor: pointer;
+	width: 7em;
+	font-size: 60%;
+	display: inline-block;
+	vertical-align: middle;
+	overflow: hidden;
+}
+
+.switch .switch-slide {
+	width: 13em;
+	white-space: nowrap;
+	transition: left .3s ease-out 0s;
+	-moz-transition: left .3s ease-out 0s;
+	-webkit-transition: left .3s ease-out 0s;
+	position: relative;
+	display: block;
+}
+
+.switch .switch-slide > span {
+	height: 2em;
+	line-height: 2em;
+	width: 5em;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 700;
+	display: inline;
+	float: left;
+	vertical-align: middle;
+}
+
+.switch .switch-slide .switch-slide-toggle {
+	border: 1px solid #EEE;
+	border-radius: 4px;
+	width: 2em;
+}
+
+.switch .switch-slide .switch-slide-label-on {
+	color: #3C3;
+}
+
+.switch .switch-slide .switch-slide-label-off {
+	color: #C33;
+}
+
+.switch.off .switch-slide {
+	left: -5em;
 }

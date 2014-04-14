@@ -1,3 +1,6 @@
+// Converts QWERTY to DVORAK
+var converter = {'spacebar':'spacebar','"':'_',"'":'-','+':'}','-':'[',',':'w','/':'z','.':'v',';':'s',':':'S','=':']','<':'W','?':'Z','>':'V','C':'J','B':'X','E':'>','D':'E','G':'I','F':'U','I':'C','H':'D','K':'T','J':'H','L':'N','O':'R','N':'B','Q':'"','P':'L','S':'O','R':'P','U':'G','T':'Y','W':'<','V':'K','Y':'F','X':'Q','[':'/','Z':':',']':'=','_':'{','c':'j','b':'x','e':'.','d':'e','g':'i','f':'u','i':'c','h':'d','k':'t','j':'h','l':'n','o':'r','n':'b','q':"'",'p':'l','s':'o','r':'p','u':'g','t':'y','w':',','v':'k','y':'f','x':'q','{':'?','z':';','}':'+'};
+
 var stats = {
 	startTime: null,
 	numChars: 0,
@@ -7,11 +10,17 @@ var stats = {
 	incorrectChars: {}
 }
 
+var options = {
+	convertQWERTY: true
+}
+
 $(function(){
 	addSentence('the quick brown fox jumps over the lazy dog');
 	//$('body').on('keypress', handleKeypress);
 	
 	KeyboardJS.on(alphabet(), onDownCallback, null);
+	
+	$('#switch-convert-qwerty').on('click', toggleConvertQWERTY);
 });
 
 function addSentence(sentence) {
@@ -85,14 +94,34 @@ function onDownCallback(e, a, c) {
 	return false;
 }
 
+function toggleConvertQWERTY() {
+	console.log('click');
+	if (options.convertQWERTY) {
+		// Toggle off
+		options.convertQWERTY = false;
+		$('#switch-convert-qwerty').addClass('off');
+		console.log('off');
+	} else {
+		// Toggle on
+		options.convertQWERTY = true;
+		$('#switch-convert-qwerty').removeClass('off');
+		console.log('on');
+	}
+}
+
 function alphabet() {
 	return 'a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,.,\',(,),",comma,backspace,spacebar';
 }
 
 function compareKeys(html, array, c) {
 	html = html == ' ' ? 'spacebar' : html; // Map spacebar properly
+	var key = array[array.length-1];
 	
-	if (html == array[array.length-1]) {
+	if (options.convertQWERTY) {
+		key = converter[key];
+	}
+	
+	if (html == key) {
 		return true;
 	}
 	
@@ -101,7 +130,7 @@ function compareKeys(html, array, c) {
 
 function updateStats() {
 	var min = ((Date.now() - stats.startTime) / 60000);
-	var accuracy = Math.round((stats.numChars - stats.numIncorrectChars) / stats.numChars * 100, 2);
+	var accuracy = Math.round(100 - (stats.numIncorrectChars / (stats.numCorrectChars + stats.numIncorrectChars)) * 100, 2);
 	var wpm = Math.round(stats.numWords / min);
 	var cpm = Math.round(stats.numChars / min);
 	
