@@ -25,6 +25,11 @@ $(function(){
 	KeyboardJS.on(alphabet(), onDownCallback, null);
 	
 	$('#switch-convert-qwerty').on('click', toggleConvertQWERTY);
+	
+	// Read the cookes
+	if (readCookie('qwertyConvert') == '0') {
+		toggleConvertQWERTY();
+	}
 });
 
 function addSentence(sentence) {
@@ -132,10 +137,12 @@ function toggleConvertQWERTY() {
 		// Toggle off
 		options.convertQWERTY = false;
 		$('#switch-convert-qwerty').addClass('off');
+		addCookie('qwertyConvert', '0');
 	} else {
 		// Toggle on
 		options.convertQWERTY = true;
 		$('#switch-convert-qwerty').removeClass('off');
+		addCookie('qwertyConvert', '1');
 	}
 }
 
@@ -167,4 +174,24 @@ function updateStats() {
 	$('#stat-accuracy').html(accuracy+'%');
 	$('#stat-wpm').html(wpm);
 	$('#stat-cpm').html(cpm);
+}
+
+function addCookie(name, value) {
+	var days = 365; // Length of cookie save
+	var date = new Date();
+	date.setTime(date.getTime()+(days*24*60*60*1000));
+	var expires = "; expires="+date.toGMTString();
+	
+	document.cookie = name + '=' + value + expires + '; path=/';
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
 }
