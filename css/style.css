@@ -103,11 +103,11 @@ span.incorrect {
 }
 
 .switch {
-	border-radius: 5px;
-	border: 1px solid #EEE;
+	border-radius: 1em;
+	border: 1px solid #DDD;
 	background: #FFF;
 	cursor: pointer;
-	width: 7em;
+	width: 6em;
 	font-size: 60%;
 	display: inline-block;
 	vertical-align: middle;
@@ -115,11 +115,11 @@ span.incorrect {
 }
 
 .switch .switch-slide {
-	width: 13em;
+	width: 12em;
 	white-space: nowrap;
-	transition: left .3s ease-out 0s;
-	-moz-transition: left .3s ease-out 0s;
-	-webkit-transition: left .3s ease-out 0s;
+	transition: all .23s ease-out 0s;
+	-moz-transition: all .23s ease-out 0s;
+	-webkit-transition: all .23s ease-out 0s;
 	position: relative;
 	display: block;
 }
@@ -137,19 +137,25 @@ span.incorrect {
 }
 
 .switch .switch-slide .switch-slide-toggle {
-	border: 1px solid #EEE;
-	border-radius: 4px;
+	border-radius: 1em;
 	width: 2em;
+	position: relative;
+	z-index: 1;
+	margin-right: -1em;
+	margin-left: -1em;
+	background-color: #FFF;
 }
 
 .switch .switch-slide .switch-slide-label-on {
 	color: #3C3;
+	background-color: #EFE;
 }
 
 .switch .switch-slide .switch-slide-label-off {
 	color: #C33;
+	background-color: #FEE;
 }
 
 .switch.off .switch-slide {
-	left: -5em;
+	margin-left: -4em;
 }
