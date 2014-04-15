@@ -16,7 +16,11 @@ var options = {
 
 $(function(){
 	addSentence('the quick brown fox jumps over the lazy dog');
-	//$('body').on('keypress', handleKeypress);
+	
+	// When the last letter in the sentence is reached, clear the sentence and add a new one
+	$(document).bind('endOfSentence', function(){
+		clearSentence(function(){addSentence("congratulations you have finished your first sentence so here is another")});
+	});
 	
 	KeyboardJS.on(alphabet(), onDownCallback, null);
 	
@@ -31,6 +35,28 @@ function addSentence(sentence) {
 	}
 	
 	$('#sentence').append(output).find('.char:first').addClass('current');
+	
+	var timer = 0;
+	var interval = 10;
+	var animation = 25;
+	$('#sentence > span').css('opacity', 0).each(function(){
+		timer += interval;
+		$(this).delay(timer).animate({opacity: 1}, animation, function(){ $(this).css('opacity', ''); });
+	});
+}
+
+function clearSentence(callback) {
+	var timer = 0;
+	var interval = 10;
+	var animation = 25;
+	$($('#sentence > span').get().reverse()).each(function(){
+		timer += interval;
+		$(this).delay(timer).animate({opacity: 0}, animation, function(){ $(this).remove(); })
+	});
+	
+	if (callback) {
+		setTimeout(callback, timer+animation+interval);
+	}
 }
 
 /*
@@ -89,6 +115,9 @@ function onDownCallback(e, a, c) {
 		if ($next.length) {
 			$next.addClass('current');
 			$current.removeClass('current');
+		} else {
+			// The last character has been typed
+			$(document).trigger('endOfSentence',[false]);
 		}
 		
 		updateStats();
@@ -99,17 +128,14 @@ function onDownCallback(e, a, c) {
 }
 
 function toggleConvertQWERTY() {
-	console.log('click');
 	if (options.convertQWERTY) {
 		// Toggle off
 		options.convertQWERTY = false;
 		$('#switch-convert-qwerty').addClass('off');
-		console.log('off');
 	} else {
 		// Toggle on
 		options.convertQWERTY = true;
 		$('#switch-convert-qwerty').removeClass('off');
-		console.log('on');
 	}
 }
 
