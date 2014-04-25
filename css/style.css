@@ -1,6 +1,7 @@
 body {
 	font-family: 'Open Sans', sans-serif;
 	background-color: #fcfbfa;
+	color: #444;
 }
 
 label {
@@ -39,6 +40,7 @@ label {
 	line-height: 1.7;
 	font-size: 28px;
 	font-weight: 300;
+	position: relative;
 }
 
 span.char {
@@ -59,6 +61,29 @@ span.correct {
 span.incorrect {
 	border-bottom: 2px solid #C33;
 	background-color: #FCC;
+}
+
+span.missed {
+	position: absolute;
+	padding: .2em;
+	background-color: #EEE;
+	border: 1px solid #DDD;
+	border-width: 0 1px 3px;
+	border-radius: 5px;
+	margin-top: -2.5em;
+	color: #444;
+	text-align: center;
+	/*box-shadow: 0 2px 5px 5px #FFF;*/
+	box-shadow: 0 2px 8px 0 rgba(100,150,255,.35);
+}
+
+span.missed img {
+	width: 8px;
+	height: 8px;
+	position: absolute;
+	left: 50%;
+	margin-left: -4px;
+	bottom: -8px;
 }
 
 #options {

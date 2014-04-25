@@ -14,8 +14,11 @@ var options = {
 	convertQWERTY: true
 }
 
+$sentence = $('#sentence');
+
 $(function(){
 	addSentence('the quick brown fox jumps over the lazy dog');
+	//addSentence('Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz , . " \' ');
 	
 	// When the last letter in the sentence is reached, clear the sentence and add a new one
 	$(document).bind('endOfSentence', function(){
@@ -70,20 +73,31 @@ function clearSentence(callback) {
  * c = character
  */
 function onDownCallback(e, a, c) {
+	console.log(e);
+	//console.log(a);
+	//console.log(c);
+	
 	// Test that alt, ctrl and cmd aren't down - if they are, ignore
 	if (!(e.altKey || e.ctrlKey || e.metaKey)) {
 		e.preventDefault();
+		
+		var key = a[a.length-1];
 		
 		// Start stats timer
 		if (stats.startTime == null) {
 			stats.startTime = Date.now();
 		}
 		
-		console.log(e);
-		//console.log(a);
-		//console.log(c);
-		
 		var $current = $('span.current', '#sentence');
+		
+		console.log(c+' '+key);
+		// Do check to make sure the key pressed is the key intended
+		// (when multiple keys are down, keydown will trigger multiple times.)
+		// (only use the key that was intended to be pressed)
+		if ((a.length>1 && c != key) && c != 'comma') {
+			return false;
+		}
+		
 		if (c == 'backspace') {
 			var $prev = $current.prev();
 			if ($prev.length) {
@@ -98,20 +112,37 @@ function onDownCallback(e, a, c) {
 			return false;
 		}
 		
-		if (a.length>1 && c != a[a.length-1]) {
-			return false;
+		if (options.convertQWERTY) {
+			console.log(key+' -> '+converter[key]);
+			if (converter.hasOwnProperty(key)) {
+				key = converter[key];
+			}
 		}
 		
-		if (compareKeys($current.html(), a, c)) {
+		if (compareKeys($current.html(), key)) {
+			// The correct key was pressed
 			$current.addClass('correct');
 			stats.numCorrectChars++;
-			
+			console.log(key+' correct');
 			if (a[a.length-1] == 'spacebar') {
 				stats.numWords++;
 			}
 		} else {
+			// An incorrect key was pressed
 			$current.addClass('incorrect');
 			stats.numIncorrectChars++;
+			
+			// Show the missed key above the current letter
+			$sentence.append('<span class="missed">'+key+'<img src="images/missed-arrow.png" alt="" /></missed>')
+				.find('span.missed:last').css({
+					left: $current.position().left + $current.width()/2 - $('span.missed:last').width()/2,
+					top: $current.position().top
+				}).hide().fadeIn(100).delay(750).animate({
+					opacity: 0,
+					marginTop: '-=.25em'
+				}, 250, function(){
+					$(this).remove();
+				});
 		}
 		
 		stats.numChars ++;
@@ -147,16 +178,11 @@ function toggleConvertQWERTY() {
 }
 
 function alphabet() {
-	return 'a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,.,\',(,),",comma,backspace,spacebar';
+	return 'a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,/,?,.,closeanglebracket,openanglebracket,s,\',(,),",;,:,comma,backspace,spacebar';
 }
 
-function compareKeys(html, array, c) {
+function compareKeys(html, key) {
 	html = html == ' ' ? 'spacebar' : html; // Map spacebar properly
-	var key = array[array.length-1];
-	
-	if (options.convertQWERTY) {
-		key = converter[key];
-	}
 	
 	if (html == key) {
 		return true;

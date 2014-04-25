@@ -134,6 +134,7 @@
 			"92": ["command", "windows", "win", "super", "rightcommand", "rightwindows", "rightwin", "rightsuper"],
 			"145": ["scrolllock", "scroll"],
 			"186": ["semicolon", ";"],
+			"59" : ["semicolon", ";"],
 			"187": ["equal", "equalsign", "="],
 			"188": ["comma", ","],
 			"189": ["dash", "-"],
