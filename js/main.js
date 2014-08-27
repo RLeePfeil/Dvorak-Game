@@ -11,7 +11,8 @@ var stats = {
 }
 
 var options = {
-	convertQWERTY: true
+	convertQWERTY: true,
+	keyboardGraphic: false
 }
 
 $sentence = $('#sentence');
@@ -28,10 +29,15 @@ $(function(){
 	KeyboardJS.on(alphabet(), onDownCallback, null);
 	
 	$('#switch-convert-qwerty').on('click', toggleConvertQWERTY);
+	$('#switch-keyboard-graphic').on('click', toggleKeyboardGraphic);
 	
 	// Read the cookes
 	if (readCookie('qwertyConvert') == '0') {
 		toggleConvertQWERTY();
+	}
+	
+	if (readCookie('keyboardGraphic') == '1') {
+		toggleKeyboardGraphic();
 	}
 });
 
@@ -174,6 +180,22 @@ function toggleConvertQWERTY() {
 		options.convertQWERTY = true;
 		$('#switch-convert-qwerty').removeClass('off');
 		addCookie('qwertyConvert', '1');
+	}
+}
+
+function toggleKeyboardGraphic() {
+	if (options.keyboardGraphic) {
+		// Toggle off
+		options.keyboardGraphic = false;
+		$('#keyboard-graphic').fadeOut(200);
+		$('#switch-keyboard-graphic').addClass('off');
+		addCookie('keyboardGraphic', '0');
+	} else {
+		// Toggle on
+		options.keyboardGraphic = true;
+		$('#keyboard-graphic').fadeIn(200);
+		$('#switch-keyboard-graphic').removeClass('off');
+		addCookie('keyboardGraphic', '1');
 	}
 }
 

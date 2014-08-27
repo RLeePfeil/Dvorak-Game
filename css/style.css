@@ -184,3 +184,14 @@ span.missed img {
 .switch.off .switch-slide {
 	margin-left: -4em;
 }
+
+#keyboard-graphic {
+	display: none;
+	max-width: 404px;
+	padding-bottom: 34.5%;
+	margin: 20px auto;
+	background-size: 100% auto;
+	background-image: url(../images/keyboard-graphic.png);
+	background-repeat: no-repeat;
+	background-position: 0 center;
+}
