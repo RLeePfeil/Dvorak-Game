@@ -6,7 +6,7 @@ body {
 
 label {
 	font-size: 75%;
-	padding-right: 2em;
+	padding-right: 1em;
 	vertical-align: middle;
 }
 
@@ -23,11 +23,11 @@ label {
 
 #header h1 {
 	color: #868482;
-    font-size: 22px;
-    font-variant: small-caps;
-    font-weight: 300;
-    letter-spacing: 0.15em;
-    margin: 0;
+	font-size: 22px;
+	font-variant: small-caps;
+	font-weight: 300;
+	letter-spacing: 0.15em;
+	margin: 0;
 }
 
 #header img {
@@ -88,24 +88,29 @@ span.missed img {
 
 #options {
 	border-top: 1px dashed #CCC;
-    margin: 5em 0 0;
-    padding: 0.5em 0;
+	margin: 5em 0 0;
+	padding: 0.5em 0;
+}
+
+#options .option {
+	display: inline;
 }
 
 #stats {
 	border: 1px solid #EEE;
-    border-radius: 5px;
-    margin: 0 auto;
+	border-radius: 5px;
+	margin: 0 auto;
 	overflow: hidden;
 	background-color: #FFF;
+	clear: both;
 }
 
 .stat {
 	float: left;
-    margin: 3% 0;
-    padding: 0 3%;
-    text-align: center;
-    width: 27%;
+	margin: 3% 0;
+	padding: 0 3%;
+	text-align: center;
+	width: 27%;
 	border-right: 1px solid #EEE;
 }
 
@@ -137,6 +142,7 @@ span.missed img {
 	display: inline-block;
 	vertical-align: middle;
 	overflow: hidden;
+	clear: right;
 }
 
 .switch .switch-slide {
@@ -194,4 +200,39 @@ span.missed img {
 	background-image: url(../images/keyboard-graphic.png);
 	background-repeat: no-repeat;
 	background-position: 0 center;
+}
+
+.right {
+	float: right;
+	margin-right: 0;
+	padding-right: 0;
+}
+
+@media screen and (max-width: 500px) {
+	#container {
+		padding: 10%;
+	}
+	
+	#header {
+		padding-bottom: 1.5em;
+	}
+	
+	#options {
+		margin-top: 2em;
+	}
+	
+	#options .option {
+		clear: both;
+		display: block;
+		padding: .5em 0;
+	}
+	
+	#options .option.right {
+		float: none;
+		display: block;
+	}
+	
+	#options .option .switch {
+		float: right;
+	}
 }
