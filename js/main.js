@@ -39,6 +39,9 @@ $(function(){
 	if (readCookie('keyboardGraphic') == '1') {
 		toggleKeyboardGraphic();
 	}
+	
+	// Focus input for mobile keyboard
+	//$('#virtual-keyboard-btn').on('click', function(){ $('#type-area').get(0).focus() });
 });
 
 function addSentence(sentence) {

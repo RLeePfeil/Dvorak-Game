@@ -1,3 +1,5 @@
+html, body {margin:0; font-size: 100%;}
+
 body {
 	font-family: 'Open Sans', sans-serif;
 	background-color: #fcfbfa;
@@ -208,13 +210,36 @@ span.missed img {
 	padding-right: 0;
 }
 
+#virtual-keyboard-btn {
+	display: none;
+}
+
 @media screen and (max-width: 500px) {
+	body {
+		font-size: 70%;
+	}
+	
 	#container {
-		padding: 10%;
+		padding: 0 10% 10%;
 	}
 	
 	#header {
-		padding-bottom: 1.5em;
+		padding: .5em 0;
+		margin: 0 -12% 2em;
+		background-color: #FFF;
+	}
+	
+	#header h1 {
+		font-size: 14px;
+	}
+	
+	#header img {
+		width: 16.5px;
+		height: 24px;
+	}
+	
+	#sentence {
+		font-size: 20px;
 	}
 	
 	#options {
@@ -234,5 +259,17 @@ span.missed img {
 	
 	#options .option .switch {
 		float: right;
+	}
+	
+	#type-area {
+		/*visibility: hidden;*/
+	}
+	
+	#virtual-keyboard-btn {
+		display: block;
+		padding: .5em;
+		text-align: center;
+		border: 0;
+		background-color: transparent;
 	}
 }
